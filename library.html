@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Library Book Management System</title>
+	</head>
+	<body>
+		<div>
+			<h2>Add New Books</h2>
+			<input
+				type="text"
+				id="bookInput"
+				placeholder="Enter book title"
+			/><button onclick="addToFront()">Add To Front (unshift)</button
+			><button onclick="addToEnd()">Add To End (push)</button>
+		</div>
+		<div>
+			<h2>Remove Books</h2>
+			<button onclick="removeFromFront()">Remove From Front</button
+			><button onclick="removeFromEnd()">Remove From End</button>
+		</div>
+		<div>
+			<h2>Current Book Shelf</h2>
+			<ol id="bookshelf"></ol>
+		</div>
+		<script>
+			const bookshelf = document.getElementById("bookshelf");
+			const bookInput = document.getElementById("bookInput");
+			const books = [
+				"The Great Gatsby",
+				"Sons and Lovers",
+				"To Kill a Mockingbird",
+				"Pride and Prejudice",
+			];
+
+			function updateBookshelf() {
+				if (books.length == 0) {
+					bookshelf.innerHTML = "No Books on Shelf"
+				} else {
+					bookshelf.innerHTML = `<b>Front of Shelf</b>`;
+					for (let i = 0; i < books.length; i++) {
+						bookshelf.innerHTML += `<li>${books[i]}</li>`;
+					}
+					bookshelf.innerHTML += `<b>End of Shelf</b>`;
+				}
+			}
+			updateBookshelf();
+
+			function addToFront() {
+				books.unshift(bookInput.value);
+				updateBookshelf();
+			}
+			function addToEnd() {
+				books.push(bookInput.value);
+				updateBookshelf();
+			}
+
+			function removeFromEnd() {
+				books.pop();
+				updateBookshelf();
+			}
+			function removeFromFront() {
+				books.shift(1);
+				updateBookshelf();
+			}
+		</script>
+	</body>
+</html>
